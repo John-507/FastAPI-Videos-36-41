@@ -17,3 +17,7 @@ productos= []
 def index():
     return {'mensaje':'Bienvenidos a la API de productos'}
 
+@app.get('/productos')
+def obt_productos():
+    return productos
+
