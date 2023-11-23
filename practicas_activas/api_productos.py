@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 class Producto(BaseModel):
-    id:Optional[str]
+    id: Optional[str]=None
     nombre: str
     precio_compra: float
     precio_venta: float
@@ -17,7 +17,12 @@ productos= []
 def index():
     return {'mensaje':'Bienvenidos a la API de productos'}
 
-@app.get('/productos')
+@app.get('/producto')
 def obt_productos():
     return productos
+
+@app.post('/producto')
+def crear_producto(producto: Producto):
+    productos.append(producto)
+    return {'mensaje':'Producto creado satisfactoriamente'}
 
