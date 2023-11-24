@@ -1,6 +1,6 @@
 from typing import Optional
 from uuid import uuid4 as uuid
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException 
 from pydantic import BaseModel
 
 class Producto(BaseModel):
@@ -31,9 +31,10 @@ def crear_producto(producto: Producto):
 
 @app.get('/producto/{producto_id}')
 def obtener_producto_por_id(producto_id: str):
-    for p in productos:
-        if p.id == producto_id:
-            return p
+    resultado = list (filter(lambda p: p.id == producto_id, productos))
+
+    if len(resultado):
+        return resultado[0]
         
-    return {'mensaje': f'El producto con el ID {producto_id}no fue encontrado'}
+    raise HTTPException(status_code=404, detail=f'El producto con el ID {producto_id} no fue encontrado.')
 
