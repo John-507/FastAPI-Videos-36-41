@@ -3,8 +3,6 @@ from uuid import uuid4 as uuid
 
 from fastapi import FastAPI, HTTPException 
 
-from fastapi import FastAPI
-
 from pydantic import BaseModel
 
 class Producto(BaseModel):
