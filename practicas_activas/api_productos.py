@@ -36,5 +36,5 @@ def obtener_producto_por_id(producto_id: str):
     if len(resultado):
         return resultado[0]
         
-    raise HTTPException(status_code=404, detail=f'El producto con el ID {producto_id} no fue encontrado.')
+    raise HTTPException(status_code=404, detail=f'El producto con el ID {producto_id} no fue encontrado en el sistema.')
 
