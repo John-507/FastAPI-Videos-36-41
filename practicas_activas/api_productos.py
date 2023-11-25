@@ -41,10 +41,14 @@ def obtener_producto_por_id(producto_id: str):
         
     raise HTTPException(status_code=404, detail=f'El producto con el ID {producto_id} no fue encontrado en el sistema.')
 
-    for p in productos:
-        if p.id == producto_id:
-            return p
-        
-    return {'mensaje': f'El producto con el ID {producto_id}no fue encontrado'}
+@app.delete('/producto/{producto_id}')
+def eliminar_producto_por_ID(producto_id: str):
+    resultado = list (filter(lambda p: p.id == producto_id, productos))
+
+    if len(resultado):
+        producto = resultado[0]
+        productos.remove(producto)
+        return {'mensaje': f'El producto con ID {producto_id} fue eliminado'}
+    raise HTTPException(status_code=404, detail=f'El producto con el ID {producto_id} no fue encontrado en el sistema.')
 
 
